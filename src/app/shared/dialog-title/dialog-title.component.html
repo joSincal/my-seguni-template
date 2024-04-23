@@ -1,0 +1,13 @@
+<div
+  class="flex flex-0 items-center justify-between h-16 px-6 bg-seguni-900 text-white"
+>
+  <div class="text-lg font-medium">
+    @if (icon) {
+    <i [class]="'bx text-lg me-1 ' + icon"></i>
+    }
+    {{ title }}
+  </div>
+  <button mat-icon-button mat-dialog-close [tabIndex]="-1">
+    <i class="bx bx-x-circle text-xl"></i>
+  </button>
+</div>

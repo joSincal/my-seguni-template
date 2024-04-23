@@ -1,0 +1,56 @@
+@use "sass:map";
+@use '@angular/material' as mat;
+@use "user-themes" as userThemes;
+
+/* Include the core Angular Material styles */
+@include mat.core();
+
+/* Loop through user themes and generate Angular Material themes */
+@each $name, $theme in userThemes.$user-themes {
+
+    /* Generate the palettes */
+    $palettes: (
+    );
+
+@each $name in (primary, accent, warn) {
+
+    /* Define the Angular Material theme */
+    $palette: mat.define-palette(map.get($theme, $name));
+
+    /* Replace the default colors on the defined Material palette */
+    $palette: map.merge($palette, (default: map.get(map.get($theme, $name), DEFAULT),
+                lighter: map.get(map.get($theme, $name), 100),
+                darker: map.get(map.get($theme, $name), 700),
+                text: map.get(map.get($theme, $name), DEFAULT),
+                default-contrast: map.get(map.get(map.get($theme, $name), contrast), DEFAULT),
+                lighter-contrast: map.get(map.get(map.get($theme, $name), contrast), 100),
+                darker-contrast: map.get(map.get(map.get($theme, $name), contrast), 700)));
+
+    $palettes: map.merge($palettes, (#{$name}: $palette));
+}
+
+/* Define a light & dark Angular Material theme with the generated palettes */
+$light-theme: mat.define-light-theme((color: $palettes ));
+
+$dark-theme: mat.define-dark-theme((color: $palettes ));
+
+/* Merge the custom base colors with the generated themes */
+$light-theme-colors: map.merge(map.get($light-theme, color), $light-base);
+$light-theme: map.merge((color: $light-theme-colors),
+        $light-theme-colors );
+
+$dark-theme-colors: map.merge(map.get($dark-theme, color), $dark-base);
+$dark-theme: map.merge((color: $dark-theme-colors),
+        $dark-theme-colors );
+
+/* Generate and encapsulate Angular Material themes */
+#{map.get($theme, selector)} .light,
+#{map.get($theme, selector)}.light {
+    @include mat.all-component-colors($light-theme);
+}
+
+#{map.get($theme, selector)} .dark,
+#{map.get($theme, selector)}.dark {
+    @include mat.all-component-colors($dark-theme);
+}
+}

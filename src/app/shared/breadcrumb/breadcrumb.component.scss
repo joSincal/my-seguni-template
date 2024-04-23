@@ -1,0 +1,16 @@
+:host {
+  display: block;
+}
+
+::ng-deep .xng-breadcrumb-root {
+  padding: 8px 16px;
+  font-size: 15px;
+}
+
+::ng-deep .xng-breadcrumb-separator {
+  padding: 4px 4px 0;
+}
+
+.icon-breadcrumb {
+  margin-right: 5px;
+}

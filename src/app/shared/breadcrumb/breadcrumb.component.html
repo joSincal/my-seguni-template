@@ -1,0 +1,14 @@
+<xng-breadcrumb [separator]="iconTemplate">
+  <ng-container
+    *xngBreadcrumbItem="let breadcrumb; let info = info; let first = first"
+  >
+    @if(info) {
+    <i [class]="'bx ' + info + ' icon-breadcrumb'"></i>
+    }
+    <ng-container>{{ breadcrumb }}</ng-container>
+  </ng-container>
+</xng-breadcrumb>
+
+<ng-template #iconTemplate>
+  <i class="bx bx-chevron-right"></i>
+</ng-template>

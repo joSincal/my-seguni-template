@@ -1,0 +1,33 @@
+<div class="flex flex-row justify-between items-center w-full pe-5 mt-2 mb-4">
+  <breadcrumb class="animate__animated animate__fadeInLeft" />
+
+  <div class="flex flex-row gap-x-1 animate__animated animate__fadeInRight">
+    <a
+      href="/dashboard"
+      class="item-nav"
+      matTooltip="Ver aplicaciones"
+      matTooltipPosition="below"
+    >
+      <i class="bx bxs-dashboard text-lg"></i>
+    </a>
+    <a
+      (click)="logout($event)"
+      class="item-nav hover:cursor-pointer"
+      matTooltip="Cerrar Sesión"
+      matTooltipPosition="below"
+    >
+      <i class="bx bx-log-out-circle text-lg"></i>
+    </a>
+  </div>
+</div>
+
+<p-confirmPopup>
+  <ng-template pTemplate="content" let-message>
+    <div
+      class="flex flex-col items-center w-full gap-3 border-bottom-1 surface-border p-3"
+    >
+      <i [class]="message.icon" class="text-4xl text-seguni-600"></i>
+      <p>{{ message.message }}</p>
+    </div>
+  </ng-template>
+</p-confirmPopup>

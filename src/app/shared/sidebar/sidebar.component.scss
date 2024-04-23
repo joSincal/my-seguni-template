@@ -1,0 +1,15 @@
+@tailwind components;
+
+@layer components {
+  .item-menu {
+    @apply flex flex-row text-slate-700 px-6 items-center gap-x-3 rounded-lg font-semibold hover:bg-blue-100 hover:text-seguni-900
+  }
+
+  .item-menu.active {
+    @apply bg-seguni-950 text-white
+  }
+
+  .expanded {
+    @apply bg-white rounded-lg
+  }
+}

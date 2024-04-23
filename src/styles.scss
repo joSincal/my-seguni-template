@@ -1,1 +1,44 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');
+
+@layer base {
+    html {
+        font-family: "Figtree", sans-serif !important;
+    }
+}
+
+// Change Angular Material Font
+$custom-typography: mat.define-typography-config($font-family: 'Figtree');
+@include mat.all-component-typographies($custom-typography);
+@include mat.core();
+
+body {
+    margin: 0px;
+}
+
+a {
+    text-decoration: none;
+}
+
+table {
+    width: 100%;
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(#b2e5ff75, #47556990);
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(#0080df75, #1e293b90);
+}

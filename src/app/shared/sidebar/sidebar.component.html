@@ -1,0 +1,105 @@
+<aside class="w-[21.5rem] h-full relative py-7 ps-6">
+  <div
+    class="sticky flex flex-row align-middle gap-x-3 px-1 mt-6 items-center animate__animated animate__fadeInDown"
+  >
+    <img
+      class="h-16 w-16 object-cover rounded-full"
+      [src]="
+        user().foto
+          ? 'data:image/png;base64,' + user().foto
+          : 'assets/img/avatar.png'
+      "
+      alt="user-pic"
+    />
+    <div class="flex flex-col">
+      <span class="text-lg font-semibold text-seguni-950">
+        {{ user().nombre }} {{ user().apellidos }}
+      </span>
+      <span class="text-xs text-slate-500">
+        {{ user().email }}
+      </span>
+    </div>
+  </div>
+
+  <div class="px-4 mt-8 mb-6">
+    <hr />
+  </div>
+
+  <ul
+    class="flex flex-col gap-y-1 -me-3 overflow-y-auto h-[75%] list-none p-0 pe-2"
+  >
+    <li class="animate__animated animate__fadeInLeft">
+      <a
+        routerLink="init"
+        routerLinkActive="active"
+        class="item-menu"
+        (click)="menuExpanded = null"
+      >
+        <i class="bx bx-home text-base w-4"></i>
+        <p class="text-base">Inicio</p>
+      </a>
+    </li>
+
+    @for (item of menus(); track item; let i = $index) {
+    <li class="animate__animated animate__fadeInLeft relative" [ngClass]="{'expanded': menuExpanded === i + 1}">
+      @if (item.childs.length > 0) {
+      <a
+        class="item-menu"
+        (click)="menuExpanded = menuExpanded === i + 1 ? null : i + 1"
+      >
+        <!-- <i [class]="'bx ' + item.icon + ' text-base w-4'"></i> -->
+        <i class="bx bx-home text-base w-4"></i>
+        <p class="text-base">{{ item.name }}</p>
+        <i
+          [@rotatedState]="menuExpanded === i + 1 ? 'default' : 'rotated'"
+          [class]="'absolute bx bx-chevron-up text-sm right-6'"
+        ></i>
+      </a>
+
+      <ul class="flex flex-col gap-y-1 -me-3 p-0  max-w-full">
+        @for (subItem of item.childs; track subItem;) {
+        <li
+          [@expandCollapse]="menuExpanded === i + 1 ? 'expanded' : 'collapsed'"
+        >
+          <a
+            [routerLink]="[subItem.route]"
+            routerLinkActive="active"
+            class="item-menu pl-12"
+          >
+            <!-- <i [class]="'bx ' + subItem.icon + ' text-base w-4'"></i> -->
+            <i class="bx bx-home text-base w-4"></i>
+            <p class="text-base">{{ subItem.name }}</p>
+          </a>
+        </li>
+        }
+      </ul>
+      } @else {
+      <a
+        [routerLink]="[item.route]"
+        routerLinkActive="active"
+        class="item-menu"
+        (click)="menuExpanded = null"
+      >
+        <!-- <i [class]="'bx ' + item.icon + ' text-base w-4'"></i> -->
+        <i class="bx bx-home text-base w-4"></i>
+        <p class="text-base">{{ item.name }}</p>
+      </a>
+      }
+    </li>
+    }
+  </ul>
+
+  <div class="sticky w-full px-4 animate__animated animate__fadeInUp">
+    <div class="my-6">
+      <hr />
+    </div>
+
+    <a href="/dashboard" class="w-full flex justify-center">
+      <svg class="fill-seguni-950 w-28 h-8">
+        <use
+          href="assets/img/seguni/universales-white.svg#universales-white"
+        ></use>
+      </svg>
+    </a>
+  </div>
+</aside>
